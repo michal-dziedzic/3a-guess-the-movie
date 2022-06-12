@@ -10,15 +10,16 @@ public class Main {
         Scanner letterScanner= new Scanner(System.in);
         int howManyTimesGuessed = 0;
         int rightGuess = 0;
-        boolean flag = false;
+        boolean flag;
         int randomMovie = choseRandomMovie(movieTitleCount(fileScanner));
         String chosenMovieTitle = loadMovieTitle(fileScanner2, randomMovie);
         String[] splitTitle = chosenMovieTitle.split("");
         String[] titleWithGuessedLetters = new String[splitTitle.length];
+        String wrongLetterStream="";
         for (int i = 0; i < splitTitle.length; i++) {
             System.out.print(splitTitle[i]);
         }
-        System.out.println();
+        System.out.print("You are guessing:");
         for (int i = 0; i < titleWithGuessedLetters.length; i++) {
             titleWithGuessedLetters[i]="_";
             System.out.print(titleWithGuessedLetters[i]);
@@ -38,23 +39,22 @@ public class Main {
                     System.out.print(titleWithGuessedLetters[i]);
                     flag = true;
                     rightGuess++;
-
                 } else {
                     System.out.print(titleWithGuessedLetters[i]);
                 }
             }
-            System.out.println("trafienia " + rightGuess);
             if(!flag) {
                 howManyTimesGuessed++;
-                System.out.println(howManyTimesGuessed);
+                wrongLetterStream=wrongLetterStream.concat(" " +letter);
             } else if (splitTitle.length == rightGuess) {
                 System.out.println("\nYou guessed " +chosenMovieTitle + " correctly!");
                 break;
             }
-
+            System.out.println("\nYou have guessed (" + howManyTimesGuessed + "} wrong letters " +wrongLetterStream);
+            if (howManyTimesGuessed==10) {
+                System.out.println("Game Over");
+            }
         }
-
-
 
     }
 
