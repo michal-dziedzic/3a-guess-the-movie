@@ -31,10 +31,14 @@ public class Main {
             String letter = letterScanner.nextLine();
             for (int i = 0; i < splitTitle.length; i++) {
                 if (letter.equals(splitTitle[i])){
-                    titleWithGuessedLetters[i]=letter;
+                    if (titleWithGuessedLetters[i].equals(letter)){
+                        rightGuess--;
+                    }
+                    titleWithGuessedLetters[i] = letter;
                     System.out.print(titleWithGuessedLetters[i]);
-                    flag=true;
+                    flag = true;
                     rightGuess++;
+
                 } else {
                     System.out.print(titleWithGuessedLetters[i]);
                 }
