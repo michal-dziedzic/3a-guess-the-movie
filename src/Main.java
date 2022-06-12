@@ -7,10 +7,49 @@ public class Main {
         File file = new File("movies.txt");
         Scanner fileScanner = new Scanner(file);
         Scanner fileScanner2 = new Scanner(file);
-        int randomMovie =chooseRandomMovie(movieTitleCount(fileScanner));
-        //line.toCharArray()
-        System.out.println(randomMovie);
-        System.out.println(loadMovieTitle(fileScanner2, randomMovie));
+        Scanner letterScanner= new Scanner(System.in);
+        int howManyTimesGuessed = 0;
+        int rightGuess = 0;
+        boolean flag = false;
+        int randomMovie = choseRandomMovie(movieTitleCount(fileScanner));
+        String chosenMovieTitle = loadMovieTitle(fileScanner2, randomMovie);
+        String[] splitTitle = chosenMovieTitle.split("");
+        String[] titleWithGuessedLetters = new String[splitTitle.length];
+        for (int i = 0; i < splitTitle.length; i++) {
+            System.out.print(splitTitle[i]);
+        }
+        System.out.println();
+        for (int i = 0; i < titleWithGuessedLetters.length; i++) {
+            titleWithGuessedLetters[i]="_";
+            System.out.print(titleWithGuessedLetters[i]);
+        }
+        System.out.println();
+
+        while (howManyTimesGuessed<10){
+            flag=false;
+            System.out.println("Guess a letter: ");
+            String letter = letterScanner.nextLine();
+            for (int i = 0; i < splitTitle.length; i++) {
+                if (letter.equals(splitTitle[i])){
+                    titleWithGuessedLetters[i]=letter;
+                    System.out.print(titleWithGuessedLetters[i]);
+                    flag=true;
+                    rightGuess++;
+                } else {
+                    System.out.print(titleWithGuessedLetters[i]);
+                }
+            }
+            System.out.println("trafienia " + rightGuess);
+            if(!flag) {
+                howManyTimesGuessed++;
+                System.out.println(howManyTimesGuessed);
+            } else if (splitTitle.length == rightGuess) {
+                System.out.println("\nYou guessed " +chosenMovieTitle + " correctly!");
+                break;
+            }
+
+        }
+
 
 
     }
@@ -38,8 +77,7 @@ public class Main {
         return movieTitle;
     }
 
-    private static int chooseRandomMovie (int movieTitleCount) {
-        System.out.println(movieTitleCount);
+    private static int choseRandomMovie(int movieTitleCount) {
         return (int) (Math.random() * movieTitleCount);
     }
 
