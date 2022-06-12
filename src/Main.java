@@ -16,16 +16,12 @@ public class Main {
         String[] splitTitle = chosenMovieTitle.split("");
         String[] titleWithGuessedLetters = new String[splitTitle.length];
         String wrongLetterStream="";
-        for (int i = 0; i < splitTitle.length; i++) {
-            System.out.print(splitTitle[i]);
-        }
         System.out.print("You are guessing:");
         for (int i = 0; i < titleWithGuessedLetters.length; i++) {
             titleWithGuessedLetters[i]="_";
             System.out.print(titleWithGuessedLetters[i]);
         }
         System.out.println();
-
         while (howManyTimesGuessed<10){
             flag=false;
             System.out.println("Guess a letter: ");
