@@ -26,6 +26,7 @@ public class Main {
             flag=false;
             System.out.println("Guess a letter: ");
             String letter = letterScanner.nextLine();
+            System.out.print("You are guessing:");
             for (int i = 0; i < splitTitle.length; i++) {
                 if (letter.equals(splitTitle[i])){
                     if (titleWithGuessedLetters[i].equals(letter)){
