@@ -8,7 +8,7 @@ public class Main {
         Scanner fileScanner = new Scanner(file);
         Scanner fileScanner2 = new Scanner(file);
         Scanner letterScanner= new Scanner(System.in);
-        int howManyTimesGuessed = 0;
+        int wrongGuess = 0;
         int rightGuess = 0;
         boolean flag;
         int randomMovie = choseRandomMovie(movieTitleCount(fileScanner));
@@ -16,13 +16,9 @@ public class Main {
         String[] splitTitle = chosenMovieTitle.split("");
         String[] titleWithGuessedLetters = new String[splitTitle.length];
         String wrongLetterStream="";
-        System.out.print("You are guessing:");
-        for (int i = 0; i < titleWithGuessedLetters.length; i++) {
-            titleWithGuessedLetters[i]="_";
-            System.out.print(titleWithGuessedLetters[i]);
-        }
+        displayTheHiddenTitle(titleWithGuessedLetters);
         System.out.println();
-        while (howManyTimesGuessed<10){
+        while (wrongGuess<10){
             flag=false;
             System.out.println("Guess a letter: ");
             String letter = letterScanner.nextLine();
@@ -41,16 +37,14 @@ public class Main {
                 }
             }
             if(!flag) {
-                howManyTimesGuessed++;
+                wrongGuess++;
                 wrongLetterStream=wrongLetterStream.concat(" " +letter);
             } else if (splitTitle.length == rightGuess) {
-                System.out.println("\nYou guessed " +chosenMovieTitle + " correctly!");
+                System.out.println("\nYou guessed " +chosenMovieTitle.toUpperCase() + " correctly!");
                 break;
             }
-            System.out.println("\nYou have guessed (" + howManyTimesGuessed + "} wrong letters " +wrongLetterStream);
-            if (howManyTimesGuessed==10) {
-                System.out.println("Game Over");
-            }
+            System.out.println("\nYou have guessed (" + wrongGuess + "} wrong letters " +wrongLetterStream);
+            isGameOver(wrongGuess);
         }
 
     }
@@ -82,5 +76,17 @@ public class Main {
         return (int) (Math.random() * movieTitleCount);
     }
 
+    private static void isGameOver (int howManyTimesGuessed) {
+        if (howManyTimesGuessed==10) {
+            System.out.println("Game Over");
+        }
+    }
 
+    private static void displayTheHiddenTitle (String[] titleWithGuessedLetters) {
+        System.out.print("You are guessing:");
+        for (int i = 0; i < titleWithGuessedLetters.length; i++) {
+            titleWithGuessedLetters[i]="_";
+            System.out.print(titleWithGuessedLetters[i]);
+        }
+    }
 }
